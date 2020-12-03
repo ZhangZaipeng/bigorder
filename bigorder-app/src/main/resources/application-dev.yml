@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    # driverClassName: net.sf.log4jdbc.DriverSpy
+    driverClassName: com.mysql.jdbc.Driver
+    # jdbc:log4jdbc:mysql://
+    url: jdbc:mysql://192.172.1.243:3306/bigorder?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;zeroDateTimeBehavior=convertToNull
+    username: root
+    password: bckj2018
+    filters: stat
+    initialSize: 5
+    minIdle: 5
+    maxActive: 200
+    maxWait: 10000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 100000
+    validationQuery: select 2
+    testOnBorrow: false
+    testOnReturn: false
+    testWhileIdle: true
+    keepAlive: true
+  ###文件上传限制
+  http:
+    multipart:
+      maxFileSize: 100Mb
+      maxRequestSize: 100Mb
+

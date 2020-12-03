@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petroleum.app.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.petroleum.app.domain.OrderItem">
+    <!--@Table tb_order_item-->
+    <id column="item_id" jdbcType="BIGINT" property="itemId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="goods_title" jdbcType="VARCHAR" property="goodsTitle" />
+    <result column="cover_img_url" jdbcType="VARCHAR" property="coverImgUrl" />
+    <result column="goods_detail" jdbcType="VARCHAR" property="goodsDetail" />
+    <result column="market_price" jdbcType="DECIMAL" property="marketPrice" />
+    <result column="discount_price" jdbcType="DECIMAL" property="discountPrice" />
+    <result column="bonus_point" jdbcType="INTEGER" property="bonusPoint" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    item_id, order_id, user_id, merchant_id, goods_title, cover_img_url, goods_detail, 
+    market_price, discount_price, bonus_point, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_item
+    where item_id = #{itemId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_order_item
+    where item_id = #{itemId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.petroleum.app.domain.OrderItem">
+    insert into tb_order_item (item_id, order_id, user_id, 
+      merchant_id, goods_title, cover_img_url, 
+      goods_detail, market_price, discount_price, 
+      bonus_point, created_at, updated_at
+      )
+    values (#{itemId,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{merchantId,jdbcType=BIGINT}, #{goodsTitle,jdbcType=VARCHAR}, #{coverImgUrl,jdbcType=VARCHAR}, 
+      #{goodsDetail,jdbcType=VARCHAR}, #{marketPrice,jdbcType=DECIMAL}, #{discountPrice,jdbcType=DECIMAL}, 
+      #{bonusPoint,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.petroleum.app.domain.OrderItem">
+    insert into tb_order_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="goodsTitle != null">
+        goods_title,
+      </if>
+      <if test="coverImgUrl != null">
+        cover_img_url,
+      </if>
+      <if test="goodsDetail != null">
+        goods_detail,
+      </if>
+      <if test="marketPrice != null">
+        market_price,
+      </if>
+      <if test="discountPrice != null">
+        discount_price,
+      </if>
+      <if test="bonusPoint != null">
+        bonus_point,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemId != null">
+        #{itemId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsTitle != null">
+        #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImgUrl != null">
+        #{coverImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDetail != null">
+        #{goodsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusPoint != null">
+        #{bonusPoint,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.petroleum.app.domain.OrderItem">
+    update tb_order_item
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="goodsTitle != null">
+        goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coverImgUrl != null">
+        cover_img_url = #{coverImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDetail != null">
+        goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="marketPrice != null">
+        market_price = #{marketPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discountPrice != null">
+        discount_price = #{discountPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusPoint != null">
+        bonus_point = #{bonusPoint,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where item_id = #{itemId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.petroleum.app.domain.OrderItem">
+    update tb_order_item
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      merchant_id = #{merchantId,jdbcType=BIGINT},
+      goods_title = #{goodsTitle,jdbcType=VARCHAR},
+      cover_img_url = #{coverImgUrl,jdbcType=VARCHAR},
+      goods_detail = #{goodsDetail,jdbcType=VARCHAR},
+      market_price = #{marketPrice,jdbcType=DECIMAL},
+      discount_price = #{discountPrice,jdbcType=DECIMAL},
+      bonus_point = #{bonusPoint,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where item_id = #{itemId,jdbcType=BIGINT}
+  </update>
+</mapper>

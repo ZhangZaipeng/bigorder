@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petroleum.app.mapper.OrderAddressMapper">
+  <resultMap id="BaseResultMap" type="com.petroleum.app.domain.OrderAddress">
+    <!--@Table tb_order_address-->
+    <id column="address_id" jdbcType="BIGINT" property="addressId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="receipt_name" jdbcType="VARCHAR" property="receiptName" />
+    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="detailed_address" jdbcType="VARCHAR" property="detailedAddress" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    address_id, order_id, user_id, merchant_id, receipt_name, phone_num, province, city, 
+    area, detailed_address, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_address
+    where address_id = #{addressId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_order_address
+    where address_id = #{addressId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.petroleum.app.domain.OrderAddress">
+    insert into tb_order_address (address_id, order_id, user_id, 
+      merchant_id, receipt_name, phone_num, 
+      province, city, area, 
+      detailed_address, created_at, updated_at
+      )
+    values (#{addressId,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{merchantId,jdbcType=BIGINT}, #{receiptName,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{detailedAddress,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.petroleum.app.domain.OrderAddress">
+    insert into tb_order_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="receiptName != null">
+        receipt_name,
+      </if>
+      <if test="phoneNum != null">
+        phone_num,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="detailedAddress != null">
+        detailed_address,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressId != null">
+        #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="receiptName != null">
+        #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.petroleum.app.domain.OrderAddress">
+    update tb_order_address
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="receiptName != null">
+        receipt_name = #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNum != null">
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="detailedAddress != null">
+        detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where address_id = #{addressId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.petroleum.app.domain.OrderAddress">
+    update tb_order_address
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      merchant_id = #{merchantId,jdbcType=BIGINT},
+      receipt_name = #{receiptName,jdbcType=VARCHAR},
+      phone_num = #{phoneNum,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      detailed_address = #{detailedAddress,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where address_id = #{addressId,jdbcType=BIGINT}
+  </update>
+</mapper>

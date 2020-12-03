@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petroleum.app.mapper.OrderPayMapper">
+  <resultMap id="BaseResultMap" type="com.petroleum.app.domain.OrderPay">
+    <!--@Table tb_order_pay-->
+    <id column="pay_id" jdbcType="BIGINT" property="payId" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="pay_score_amt" jdbcType="DECIMAL" property="payScoreAmt" />
+    <result column="pay_actual_amt" jdbcType="DECIMAL" property="payActualAmt" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_opt" jdbcType="VARCHAR" property="payOpt" />
+    <result column="pay_bus_id" jdbcType="VARCHAR" property="payBusId" />
+    <result column="pay_back_msg" jdbcType="VARCHAR" property="payBackMsg" />
+    <result column="pay_finished" jdbcType="SMALLINT" property="payFinished" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pay_id, order_id, user_id, merchant_id, pay_score_amt, pay_actual_amt, pay_time, 
+    pay_opt, pay_bus_id, pay_back_msg, pay_finished, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order_pay
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tb_order_pay
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.petroleum.app.domain.OrderPay">
+    insert into tb_order_pay (pay_id, order_id, user_id, 
+      merchant_id, pay_score_amt, pay_actual_amt, 
+      pay_time, pay_opt, pay_bus_id, 
+      pay_back_msg, pay_finished, created_at, 
+      updated_at)
+    values (#{payId,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{merchantId,jdbcType=BIGINT}, #{payScoreAmt,jdbcType=DECIMAL}, #{payActualAmt,jdbcType=DECIMAL}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{payOpt,jdbcType=VARCHAR}, #{payBusId,jdbcType=VARCHAR}, 
+      #{payBackMsg,jdbcType=VARCHAR}, #{payFinished,jdbcType=SMALLINT}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.petroleum.app.domain.OrderPay">
+    insert into tb_order_pay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="payId != null">
+        pay_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="payScoreAmt != null">
+        pay_score_amt,
+      </if>
+      <if test="payActualAmt != null">
+        pay_actual_amt,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="payOpt != null">
+        pay_opt,
+      </if>
+      <if test="payBusId != null">
+        pay_bus_id,
+      </if>
+      <if test="payBackMsg != null">
+        pay_back_msg,
+      </if>
+      <if test="payFinished != null">
+        pay_finished,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="payId != null">
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="payScoreAmt != null">
+        #{payScoreAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payActualAmt != null">
+        #{payActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payOpt != null">
+        #{payOpt,jdbcType=VARCHAR},
+      </if>
+      <if test="payBusId != null">
+        #{payBusId,jdbcType=VARCHAR},
+      </if>
+      <if test="payBackMsg != null">
+        #{payBackMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payFinished != null">
+        #{payFinished,jdbcType=SMALLINT},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.petroleum.app.domain.OrderPay">
+    update tb_order_pay
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="payScoreAmt != null">
+        pay_score_amt = #{payScoreAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payActualAmt != null">
+        pay_actual_amt = #{payActualAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payOpt != null">
+        pay_opt = #{payOpt,jdbcType=VARCHAR},
+      </if>
+      <if test="payBusId != null">
+        pay_bus_id = #{payBusId,jdbcType=VARCHAR},
+      </if>
+      <if test="payBackMsg != null">
+        pay_back_msg = #{payBackMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="payFinished != null">
+        pay_finished = #{payFinished,jdbcType=SMALLINT},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.petroleum.app.domain.OrderPay">
+    update tb_order_pay
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=BIGINT},
+      merchant_id = #{merchantId,jdbcType=BIGINT},
+      pay_score_amt = #{payScoreAmt,jdbcType=DECIMAL},
+      pay_actual_amt = #{payActualAmt,jdbcType=DECIMAL},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      pay_opt = #{payOpt,jdbcType=VARCHAR},
+      pay_bus_id = #{payBusId,jdbcType=VARCHAR},
+      pay_back_msg = #{payBackMsg,jdbcType=VARCHAR},
+      pay_finished = #{payFinished,jdbcType=SMALLINT},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where pay_id = #{payId,jdbcType=BIGINT}
+  </update>
+</mapper>

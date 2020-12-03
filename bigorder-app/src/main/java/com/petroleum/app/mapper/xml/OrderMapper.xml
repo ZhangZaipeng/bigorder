@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.petroleum.app.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.petroleum.app.domain.Order">
+    <!--@Table tb_order-->
+    <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="merchant_id" jdbcType="BIGINT" property="merchantId" />
+    <result column="order_type" jdbcType="SMALLINT" property="orderType" />
+    <result column="order_amt" jdbcType="DECIMAL" property="orderAmt" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="order_result" jdbcType="INTEGER" property="orderResult" />
+    <result column="order_is_postage" jdbcType="SMALLINT" property="orderIsPostage" />
+    <result column="order_postage_amt" jdbcType="DECIMAL" property="orderPostageAmt" />
+    <result column="score_return" jdbcType="INTEGER" property="scoreReturn" />
+    <result column="mark" jdbcType="VARCHAR" property="mark" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, user_id, merchant_id, order_type, order_amt, order_status, order_result, 
+    order_is_postage, order_postage_amt, score_return, mark, created_at, updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_order
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.petroleum.app.domain.Order">
+    insert into tb_order (order_id, user_id, merchant_id, 
+      order_type, order_amt, order_status, 
+      order_result, order_is_postage, order_postage_amt, 
+      score_return, mark, created_at, 
+      updated_at)
+    values (#{orderId,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{merchantId,jdbcType=BIGINT}, 
+      #{orderType,jdbcType=SMALLINT}, #{orderAmt,jdbcType=DECIMAL}, #{orderStatus,jdbcType=INTEGER}, 
+      #{orderResult,jdbcType=INTEGER}, #{orderIsPostage,jdbcType=SMALLINT}, #{orderPostageAmt,jdbcType=DECIMAL}, 
+      #{scoreReturn,jdbcType=INTEGER}, #{mark,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.petroleum.app.domain.Order">
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="merchantId != null">
+        merchant_id,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="orderAmt != null">
+        order_amt,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="orderResult != null">
+        order_result,
+      </if>
+      <if test="orderIsPostage != null">
+        order_is_postage,
+      </if>
+      <if test="orderPostageAmt != null">
+        order_postage_amt,
+      </if>
+      <if test="scoreReturn != null">
+        score_return,
+      </if>
+      <if test="mark != null">
+        mark,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderAmt != null">
+        #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderResult != null">
+        #{orderResult,jdbcType=INTEGER},
+      </if>
+      <if test="orderIsPostage != null">
+        #{orderIsPostage,jdbcType=SMALLINT},
+      </if>
+      <if test="orderPostageAmt != null">
+        #{orderPostageAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreReturn != null">
+        #{scoreReturn,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.petroleum.app.domain.Order">
+    update tb_order
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="merchantId != null">
+        merchant_id = #{merchantId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderAmt != null">
+        order_amt = #{orderAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderResult != null">
+        order_result = #{orderResult,jdbcType=INTEGER},
+      </if>
+      <if test="orderIsPostage != null">
+        order_is_postage = #{orderIsPostage,jdbcType=SMALLINT},
+      </if>
+      <if test="orderPostageAmt != null">
+        order_postage_amt = #{orderPostageAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreReturn != null">
+        score_return = #{scoreReturn,jdbcType=INTEGER},
+      </if>
+      <if test="mark != null">
+        mark = #{mark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.petroleum.app.domain.Order">
+    update tb_order
+    set user_id = #{userId,jdbcType=BIGINT},
+      merchant_id = #{merchantId,jdbcType=BIGINT},
+      order_type = #{orderType,jdbcType=SMALLINT},
+      order_amt = #{orderAmt,jdbcType=DECIMAL},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      order_result = #{orderResult,jdbcType=INTEGER},
+      order_is_postage = #{orderIsPostage,jdbcType=SMALLINT},
+      order_postage_amt = #{orderPostageAmt,jdbcType=DECIMAL},
+      score_return = #{scoreReturn,jdbcType=INTEGER},
+      mark = #{mark,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>
